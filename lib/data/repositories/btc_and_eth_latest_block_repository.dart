@@ -5,7 +5,11 @@ class LatestBlockRepository {
   final String _baseUrl = "https://blockchain.info/latestblock";
 
   Future<LatestBlockModel> getLatestBlock() async {
-    final response = await http.get(Uri.parse(_baseUrl));
+    final response = await http.get(Uri.parse(_baseUrl), headers: {
+      "Accept": "application/json",
+      "Access-Control-Allow-Origin": "*",
+      "Access-Control-Allow-Methods": "GET",
+    });
     if (response.statusCode == 200) {
       return latestBlockModelFromJson(response.body);
     } else {

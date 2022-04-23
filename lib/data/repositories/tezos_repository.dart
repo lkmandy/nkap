@@ -5,7 +5,11 @@ class TezosBlockRepository {
   final String _baseUrl = "https://api.tzkt.io/v1/blocks";
 
   Future<TezosBlockModel> getTezosBlock() async {
-    final response = await http.get(Uri.parse(_baseUrl));
+    final response = await http.get(Uri.parse(_baseUrl), headers: {
+      "Accept": "application/json",
+      "Access-Control-Allow-Origin": "*",
+      "Access-Control-Allow-Methods": "GET"
+    });
     if (response.statusCode == 200) {
       return tezosBlockModelFromJson(response.body);
     } else {
