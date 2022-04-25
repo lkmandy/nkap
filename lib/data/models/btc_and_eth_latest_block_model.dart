@@ -1,6 +1,11 @@
+import 'dart:convert';
+
 import 'package:json_annotation/json_annotation.dart';
 
 part 'btc_and_eth_latest_block_model.g.dart';
+
+LatestBlockModel latestBlockModelFromJson(String str) => LatestBlockModel.fromJson(json.decode(str));
+String latestBlockModelToJson(LatestBlockModel data) => json.encode(data.toJson());
 
 @JsonSerializable()
 class LatestBlockModel {

@@ -10,8 +10,8 @@ LatestTransactionsModel _$LatestTransactionsModelFromJson(
         Map<String, dynamic> json) =>
     LatestTransactionsModel(
       hash: json['hash'] as String,
-      transactions: json['transactions'] as List<dynamic>,
-      numberOfTransactions: json['numberOfTransactions'] as int,
+      transactions: (json['transactions'] ?? []) as List<dynamic>,
+      numberOfTransactions: (json['numberOfTransactions'] ?? 0) as int,
       time: json['time'] as int,
       height: json['height'] as int,
     );

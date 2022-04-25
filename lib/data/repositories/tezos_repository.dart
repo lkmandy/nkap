@@ -13,7 +13,7 @@ class TezosBlockRepository {
       "Access-Control-Allow-Methods": "GET"
     });
     if (response.statusCode == 200) {
-      return json.decode(response.body);
+      return tezosBlockModelFromJson(response.body);
     } else {
       throw Exception("Failed to load tezos block");
     }

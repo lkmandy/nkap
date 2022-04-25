@@ -13,7 +13,7 @@ class LatestBlockRepository {
       "Access-Control-Allow-Methods": "GET",
     });
     if (response.statusCode == 200) {
-      return json.decode(response.body);
+      return  latestBlockModelFromJson(response.body);
     } else {
       throw Exception("Failed to load latest block");
     }
