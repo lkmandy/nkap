@@ -178,6 +178,13 @@ class _SignUpState extends State<SignUp> {
   final _formKey = GlobalKey<FormState>();
   final _emailController = TextEditingController();
   final _passwordController = TextEditingController();
+  bool _obscureText = true;
+
+  void _toggle() {
+    setState(() {
+      _obscureText = !_obscureText;
+    });
+  }
 
   @override
   void dispose() {
@@ -250,6 +257,7 @@ class _SignUpState extends State<SignUp> {
                                 suffixIcon: const SizedBox(),
                                 controller: _emailController,
                                 maxLines: 1,
+                                obscureText: false,
                                 textInputType: TextInputType.emailAddress,
                                 autoValidateMode:
                                     AutovalidateMode.onUserInteraction,
@@ -274,8 +282,21 @@ class _SignUpState extends State<SignUp> {
                                 },
                                 headingText: "Password",
                                 hintText: "Password",
-                                suffixIcon: const SizedBox(),
+                                suffixIcon: Padding(
+                                  padding:
+                                  const EdgeInsets.fromLTRB(0, 0, 4, 0),
+                                  child: GestureDetector(
+                                    onTap: _toggle,
+                                    child: Icon(
+                                      _obscureText
+                                          ? Icons.visibility_rounded
+                                          : Icons.visibility_off_rounded,
+                                      size: 24,
+                                    ),
+                                  ),
+                                ),
                                 maxLines: 1,
+                                obscureText: _obscureText,
                                 textInputType: TextInputType.emailAddress,
                               ),
                               const SizedBox(

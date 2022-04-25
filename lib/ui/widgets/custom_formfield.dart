@@ -13,6 +13,7 @@ class CustomFormField extends StatelessWidget {
   final TextEditingController controller;
   AutovalidateMode autoValidateMode;
   final int maxLines;
+  bool obscureText;
   String? Function(dynamic value) validator;
 
   CustomFormField(
@@ -24,6 +25,7 @@ class CustomFormField extends StatelessWidget {
       this.textInputAction,
       required this.controller,
       required this.maxLines,
+        required this.obscureText,
         required this.autoValidateMode,
          required this.validator,
       })
@@ -54,6 +56,7 @@ class CustomFormField extends StatelessWidget {
           child: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 12.0),
             child: TextFormField(
+              obscureText: obscureText,
               maxLines: maxLines,
               controller: controller,
               textInputAction: textInputAction,

@@ -20,6 +20,13 @@ class _SignInState extends State<Login> {
   final _formKey = GlobalKey<FormState>();
   final _emailController = TextEditingController();
   final _passwordController = TextEditingController();
+  bool _obscureText = true;
+
+  void _toggle() {
+    setState(() {
+      _obscureText = !_obscureText;
+    });
+  }
 
   @override
   void dispose() {
@@ -92,6 +99,7 @@ class _SignInState extends State<Login> {
                                   suffixIcon: const SizedBox(),
                                   controller: _emailController,
                                   maxLines: 1,
+                                  obscureText: false,
                                   textInputType: TextInputType.emailAddress,
                                   autoValidateMode:
                                       AutovalidateMode.onUserInteraction,
@@ -116,8 +124,21 @@ class _SignInState extends State<Login> {
                                   },
                                   headingText: "Password",
                                   hintText: "Password",
-                                  suffixIcon: const SizedBox(),
+                                  suffixIcon: Padding(
+                                    padding:
+                                        const EdgeInsets.fromLTRB(0, 0, 4, 0),
+                                    child: GestureDetector(
+                                      onTap: _toggle,
+                                      child: Icon(
+                                        _obscureText
+                                            ? Icons.visibility_rounded
+                                            : Icons.visibility_off_rounded,
+                                        size: 24,
+                                      ),
+                                    ),
+                                  ),
                                   maxLines: 1,
+                                  obscureText: _obscureText,
                                   textInputType: TextInputType.emailAddress,
                                 ),
                                 const SizedBox(
@@ -155,14 +176,12 @@ class _SignInState extends State<Login> {
                                     //   ),
                                     // ),
                                     // Text('Sign In With Google', style: TextStyle(fontSize: 8,)),
-
                                   ],
                                 )
                               ],
                             ),
                           ),
                         ),
-
                         CustomRichText(
                           discription: "Don't have an account? ",
                           text: "Sign Up",
