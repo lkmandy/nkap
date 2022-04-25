@@ -43,11 +43,11 @@ class _BitCoinTransactionDetailsState extends State<BitCoinTransactionDetails> {
               return const Center(
                 child: CircularProgressIndicator(),
               );
-
             }
             if (state is LatestBlockLoadedState) {
               BlocProvider.of<LatestTransactionsBloc>(context).add(
-                LatestHash(blockHash: state.latestBlock.hash ?? ""),);
+                LatestHash(blockHash: state.latestBlock.hash ?? ""),
+              );
             }
 
             return BlocBuilder<LatestTransactionsBloc, LatestTransactionsState>(
@@ -57,7 +57,7 @@ class _BitCoinTransactionDetailsState extends State<BitCoinTransactionDetails> {
                   child: CircularProgressIndicator(),
                 );
               }
-              if (state is LatestTransactionsLoadedState)  {
+              if (state is LatestTransactionsLoadedState) {
                 return Padding(
                     padding: const EdgeInsets.all(8.0),
                     child: Scrollbar(
@@ -69,11 +69,12 @@ class _BitCoinTransactionDetailsState extends State<BitCoinTransactionDetails> {
                         return GestureDetector(
                           child: ListTile(
                             tileColor: Colors.white,
-                            title: Text(
-                                state.latestTransactions.transactions[index] ?? ""),
-                            subtitle: Text('lte'),
+                            title: Text('Transaction ${index + 1}:'),
+                            subtitle: Text(
+                                'time: ${state.latestTransactions.transactions[index].transactionTimestamp.toString()} \nindex: ${state.latestTransactions.transactions[index].transactionIndex}'),
                             isThreeLine: true,
-                            trailing: Text("4 BTC"),
+                            trailing: Text(
+                                '${state.latestTransactions.transactions[index].transactionAmount.toString()} BTC'),
                           ),
                           onTap: () {},
                         );

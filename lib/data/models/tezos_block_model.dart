@@ -1,12 +1,11 @@
 import 'dart:convert';
 
 import 'package:json_annotation/json_annotation.dart';
-import 'package:nkap/data/models/tezos_transactons_model.dart';
+import 'package:nkap/data/models/btc_eth_transactons_model.dart';
 
 part 'tezos_model.g.dart';
 
-TezosBlockModel tezosBlockModelFromJson(String str) =>
-    TezosBlockModel.fromJson(json.decode(str)[0]);
+TezosBlockModel tezosBlockModelFromJson(String str) => TezosBlockModel.fromJson(json.decode(str));
 String tezosBlockModelToJson(TezosBlockModel data) =>
     json.encode(data.toJson());
 
@@ -14,11 +13,20 @@ String tezosBlockModelToJson(TezosBlockModel data) =>
 class TezosBlockModel {
   TezosBlockModel({
     required this.hash,
-    required this.transactions,
+    required this.level,
+    required this.timestamp,
+    required this.cycle,
+    required this.fee,
+    required this.deposit,
+
   });
 
   String hash;
-  List<TezosTransactionsModel> transactions;
+  int level;
+  DateTime timestamp;
+  int cycle;
+  int fee;
+  int deposit;
 
   factory TezosBlockModel.fromJson(Map<String, dynamic> json) =>
       _$TezosBlockModelFromJson(json);

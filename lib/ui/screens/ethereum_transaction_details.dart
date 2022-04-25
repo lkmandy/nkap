@@ -41,53 +41,54 @@ class _EthereumTransactionDetailsState
               return const Center(
                 child: CircularProgressIndicator(),
               );
-
             }
             if (state is LatestBlockLoadedState) {
               BlocProvider.of<LatestTransactionsBloc>(context).add(
-                LatestHash(blockHash: state.latestBlock.hash ?? " "),);
+                LatestHash(blockHash: state.latestBlock.hash ?? " "),
+              );
             }
 
             return BlocBuilder<LatestTransactionsBloc, LatestTransactionsState>(
                 builder: (context, state) {
-                  if (state is LatestTransactionsLoadingState) {
-                    return const Center(
-                      child: CircularProgressIndicator(),
-                    );
-                  }
-                  if (state is LatestTransactionsLoadedState)  {
-                    return Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: Scrollbar(
-                            child: ListView.builder(
-                              scrollDirection: Axis.vertical,
-                              padding: const EdgeInsets.all(8),
-                              itemCount: state.latestTransactions.transactions.length,
-                              itemBuilder: (BuildContext context, int index) {
-                                return GestureDetector(
-                                  child: ListTile(
-                                    tileColor: Colors.white,
-                                    title: Text(
-                                        state.latestTransactions.transactions[index] ?? ""),
-                                    subtitle: Text('...'),
-                                    isThreeLine: true,
-                                    trailing: Text("4 ETC"),
-                                  ),
-                                  onTap: () {},
-                                );
-                              },
-                            )));
-                  }
-                  if (state is LatestTransactionsErrorState) {
-                    return Center(
-                      child: Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: Text(state.error.toString()),
-                      ),
-                    );
-                  }
-                  return const SizedBox();
-                });
+              if (state is LatestTransactionsLoadingState) {
+                return const Center(
+                  child: CircularProgressIndicator(),
+                );
+              }
+              if (state is LatestTransactionsLoadedState) {
+                return Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Scrollbar(
+                        child: ListView.builder(
+                      scrollDirection: Axis.vertical,
+                      padding: const EdgeInsets.all(8),
+                      itemCount: state.latestTransactions.transactions.length,
+                      itemBuilder: (BuildContext context, int index) {
+                        return GestureDetector(
+                          child: ListTile(
+                            tileColor: Colors.white,
+                            title: Text('Transaction ${index + 1}:'),
+                            subtitle: Text(
+                                'time: ${state.latestTransactions.transactions[index].transactionTimestamp.toString()} \nindex: ${state.latestTransactions.transactions[index].transactionIndex}'),
+                            isThreeLine: true,
+                            trailing: Text(
+                                '${state.latestTransactions.transactions[index].transactionAmount.toString()} ETH'),
+                          ),
+                          onTap: () {},
+                        );
+                      },
+                    )));
+              }
+              if (state is LatestTransactionsErrorState) {
+                return Center(
+                  child: Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Text(state.error.toString()),
+                  ),
+                );
+              }
+              return const SizedBox();
+            });
           },
         ),
       ),

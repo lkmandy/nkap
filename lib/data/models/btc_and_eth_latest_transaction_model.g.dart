@@ -10,18 +10,23 @@ LatestTransactionsModel _$LatestTransactionsModelFromJson(
         Map<String, dynamic> json) =>
     LatestTransactionsModel(
       hash: json['hash'] as String,
-      transactions: (json['transactions'] ?? []) as List<dynamic>,
-      numberOfTransactions: (json['numberOfTransactions'] ?? 0) as int,
+      transactions: (json['tx'] as List<dynamic>)
+          .map((e) =>
+              BtcEthTransactionsModel.fromJson(e as Map<String, dynamic>))
+          .toList(),
+      numberOfTransactions: json['n_tx'] as int,
       time: json['time'] as int,
-      height: json['height'] as int,
+      fee: json['fee'] as int,
+      size: json['size'] as int,
     );
 
 Map<String, dynamic> _$LatestTransactionsModelToJson(
         LatestTransactionsModel instance) =>
     <String, dynamic>{
       'hash': instance.hash,
-      'transactions': instance.transactions,
-      'numberOfTransactions': instance.numberOfTransactions,
+      'tx': instance.transactions,
+      'n_tx': instance.numberOfTransactions,
       'time': instance.time,
-      'height': instance.height,
+      'fee': instance.fee,
+      'size': instance.size,
     };
