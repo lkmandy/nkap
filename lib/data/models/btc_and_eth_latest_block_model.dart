@@ -1,10 +1,8 @@
-import 'dart:convert';
+import 'package:json_annotation/json_annotation.dart';
 
-LatestBlockModel latestBlockModelFromJson(String str) =>
-    LatestBlockModel.fromJson(json.decode(str));
+part 'btc_and_eth_latest_block_model.g.dart';
 
-String latestBlockModelToJson(LatestBlockModel data) => json.encode(data.toJson());
-
+@JsonSerializable()
 class LatestBlockModel {
   LatestBlockModel({
     required this.hash,
@@ -21,19 +19,8 @@ class LatestBlockModel {
   int? height;
   List<int> txIndexes;
 
-  factory LatestBlockModel.fromJson(Map<String, dynamic> json) => LatestBlockModel(
-    hash: json["hash"],
-    time: json["time"],
-    blockIndex: json["blockIndex"],
-    height: json["height"],
-    txIndexes: json["txIndexes"].cast<int>(),
-  );
+  factory LatestBlockModel.fromJson(Map<String, dynamic> json) =>
+      _$LatestBlockModelFromJson(json);
 
-  Map<String, dynamic> toJson() => {
-    "hash": hash,
-    "time": time,
-    "blockIndex": blockIndex,
-    "height": height,
-    "txIndexes": txIndexes,
-  };
+  Map<String, dynamic> toJson() => _$LatestBlockModelToJson(this);
 }

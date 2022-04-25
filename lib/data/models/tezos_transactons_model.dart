@@ -1,13 +1,10 @@
-import 'dart:convert';
+import 'package:json_annotation/json_annotation.dart';
 
-Transactions transactionsModelFromJson(String str) =>
-    Transactions.fromJson(json.decode(str));
+part 'tezos_transactons_model.g.dart';
 
-String transactionsModelToJson(Transactions data) =>
-    json.encode(data.toJson());
-
-class Transactions {
-  Transactions({
+@JsonSerializable()
+class TezosTransactionsModel {
+  TezosTransactionsModel({
     required this.transactionHash,
     required this.transactionAmount,
     required this.transactionSender,
@@ -19,18 +16,8 @@ class Transactions {
   Map<String, String> transactionSender;
   DateTime transactionTimestamp;
 
-  factory Transactions.fromJson(Map<String, dynamic> data) =>
-      Transactions(
-        transactionHash: data['hash'],
-        transactionAmount: data['amount'],
-        transactionSender: data['sender'],
-        transactionTimestamp: data['timestamp'],
-      );
+  factory TezosTransactionsModel.fromJson(Map<String, dynamic> json) =>
+      _$TezosTransactionsModelFromJson(json);
 
-  Map<String, dynamic> toJson() => {
-        'hash': transactionHash,
-        'amount': transactionAmount,
-        'sender': transactionSender,
-        'timestamp': transactionTimestamp,
-      };
+  Map<String, dynamic> toJson() => _$TezosTransactionsModelToJson(this);
 }

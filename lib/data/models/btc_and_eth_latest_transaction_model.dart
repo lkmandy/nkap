@@ -1,43 +1,27 @@
-import 'dart:convert';
+import 'package:json_annotation/json_annotation.dart';
 
-LatestTransactionsModel latestTransactionsModelFromJson(String str) =>
-    LatestTransactionsModel.fromJson(json.decode(str));
+part 'btc_and_eth_latest_transaction_model.g.dart';
 
-String latestTransactionsModelToJson(LatestTransactionsModel data) => json.encode(data.toJson());
-
+@JsonSerializable()
 class LatestTransactionsModel {
   LatestTransactionsModel({
     required this.hash,
-    required this.blockIndex,
-    required this.blockHeight,
-    required this.txIndex,
-    required this.inputs,
-    required this.out,
+    required this.transactions,
+    required this.numberOfTransactions,
+    required this.time,
+    required this.height
+
   });
 
-  String? hash;
-  int? blockIndex;
-  int? blockHeight;
-  int? txIndex;
-  List<dynamic> inputs;
-  List<dynamic> out;
+  String hash;
+  List<dynamic> transactions;
+  int numberOfTransactions;
+  int time;
+  int height;
 
+  factory LatestTransactionsModel.fromJson(Map<String, dynamic> json) =>
+      _$LatestTransactionsModelFromJson(json);
 
-  factory LatestTransactionsModel.fromJson(Map<String, dynamic> json) => LatestTransactionsModel(
-    hash: json["hash"],
-    blockIndex: json["blockIndex"],
-    txIndex: json["txIndexes"],
-    blockHeight: json["block_height"],
-    inputs: json["inputs"],
-    out: json["out"],
-  );
+  Map<String, dynamic> toJson() => _$LatestTransactionsModelToJson(this);
 
-  Map<String, dynamic> toJson() => {
-    "hash": hash,
-    "blockIndex": blockIndex,
-    "txIndex": txIndex,
-    "block_height": blockHeight,
-    "inputs": inputs,
-    "out": out,
-  };
 }
