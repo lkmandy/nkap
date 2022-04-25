@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:http/http.dart' as http;
 import 'package:nkap/data/models/tezos_model.dart';
 
@@ -11,7 +13,7 @@ class TezosBlockRepository {
       "Access-Control-Allow-Methods": "GET"
     });
     if (response.statusCode == 200) {
-      return tezosBlockModelFromJson(response.body);
+      return json.decode(response.body);
     } else {
       throw Exception("Failed to load tezos block");
     }
