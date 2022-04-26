@@ -252,6 +252,7 @@ class _SignUpState extends State<SignUp> {
                           child: Column(
                             children: [
                               CustomFormField(
+                                key: const ValueKey('emailSignUpField'),
                                 headingText: "Email",
                                 hintText: "Email",
                                 suffixIcon: const SizedBox(),
@@ -272,6 +273,7 @@ class _SignUpState extends State<SignUp> {
                                 height: 10,
                               ),
                               CustomFormField(
+                                key: const ValueKey('passwordSignUpField'),
                                 controller: _passwordController,
                                 autoValidateMode:
                                     AutovalidateMode.onUserInteraction,

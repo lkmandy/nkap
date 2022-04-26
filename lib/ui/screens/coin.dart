@@ -44,6 +44,7 @@ class _CoinState extends State<Coin> {
           Padding(
             padding: const EdgeInsets.all(4.0),
             child: IconButton(
+              key: const ValueKey('LogoutKey'),
               icon: const Icon(Icons.logout),
               tooltip: 'Logout',
               onPressed: () {
