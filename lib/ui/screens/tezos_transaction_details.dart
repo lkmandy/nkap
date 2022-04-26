@@ -36,18 +36,20 @@ class _TezosTransactionDetailsState extends State<TezosTransactionDetails> {
                 child: ListView.builder(
                     scrollDirection: Axis.vertical,
                     padding: const EdgeInsets.all(8),
-                    itemCount: state.tezosBlock.transactions.length,
+                    itemCount: 50,
                     itemBuilder: (BuildContext context, int index) {
                       return GestureDetector(
                         child: ListTile(
                           tileColor: Colors.white,
-                          title: Text(state.tezosBlock.hash),
-                          subtitle: Text("Dracaena"),
+                          title: Text('Block ${state.tezosBlock[index].level}'),
+                          subtitle:
+                              Text('time: ${state.tezosBlock[index].timestamp}'
+                                  '\ncycle: ${state.tezosBlock[index].cycle}'),
                           isThreeLine: true,
-                          trailing: Text("4 XTZ"),
+                          trailing:
+                              Text('${state.tezosBlock[index].deposit} XTZ'),
                         ),
-                        onTap: () {
-                        },
+                        onTap: () {},
                       );
                     }),
               );

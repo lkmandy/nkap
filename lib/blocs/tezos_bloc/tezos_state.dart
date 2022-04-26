@@ -15,7 +15,7 @@ class TezosBlockLoadingState extends TezosBlockState {
 }
 
 class TezosBlockLoadedState extends TezosBlockState {
-  final TezosBlockModel tezosBlock;
+  final List<TezosBlockModel> tezosBlock;
 
   TezosBlockLoadedState(this.tezosBlock);
 
