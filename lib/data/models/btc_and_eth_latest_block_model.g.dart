@@ -8,10 +8,10 @@ part of 'btc_and_eth_latest_block_model.dart';
 
 LatestBlockModel _$LatestBlockModelFromJson(Map<String, dynamic> json) =>
     LatestBlockModel(
-      hash: json['hash'] as String?,
-      time: json['time'] as int?,
-      blockIndex: json['blockIndex'] as int?,
-      height: json['height'] as int?,
+      hash: json['hash'] as String,
+      time: json['time'] as int,
+      blockIndex: json['blockIndex'] as int,
+      height: json['height'] as int,
       txIndexes:
           (json['txIndexes'] as List<dynamic>).map((e) => e as int).toList(),
     );

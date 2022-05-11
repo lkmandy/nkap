@@ -18,10 +18,10 @@ class LatestBlockModel {
 
   });
 
-  String? hash;
-  int? time;
-  int? blockIndex;
-  int? height;
+  String hash;
+  int time;
+  int blockIndex;
+  int height;
   List<int> txIndexes;
 
   factory LatestBlockModel.fromJson(Map<String, dynamic> json) =>

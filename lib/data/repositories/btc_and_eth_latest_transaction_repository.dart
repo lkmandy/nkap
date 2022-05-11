@@ -1,5 +1,3 @@
-import 'dart:convert';
-
 import 'package:http/http.dart' as http;
 import 'package:nkap/data/models/btc_and_eth_latest_transaction_model.dart';
 
